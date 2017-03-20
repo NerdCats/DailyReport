@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\DailyReport.cs" />
     <Compile Include="URLs.cs" />
     <Compile Include="Config\DailyReportConfigModel.cs" />
     <Compile Include="Model\CountReport.cs" />

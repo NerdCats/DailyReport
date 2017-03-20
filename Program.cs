@@ -10,8 +10,8 @@ namespace FetchDailyReport
     {
         static void Main(string[] args)
         {
-            List<CountReport> countReportCollection = new List<CountReport>();
-            List<DailyReportConfigModel> dailyReport = DailyReportConfigModel.DailyReportConfigModelFactory();
+            List<DailyReport> dailyReports = new List<DailyReport>();
+            List<DailyReportConfigModel> dailyReportConfig = DailyReportConfigModel.DailyReportConfigModelFactory();
             string auth_token;
             try
             {
@@ -24,7 +24,7 @@ namespace FetchDailyReport
                     auth_token = new HttpRequest().getAuthToken();
                 }
                 catch (Exception e2)
-                {                    
+                {
                     try
                     {
                         auth_token = new HttpRequest().getAuthToken();
@@ -37,7 +37,7 @@ namespace FetchDailyReport
             }
             
             var currentTime = new TimeString();
-            foreach (var report in dailyReport)
+            foreach (var report in dailyReportConfig)
             {
                 CountReport countReport;
                 var reportUrl = report.ReportUrl.Replace("{startDate}", currentTime.StartTimeISO).Replace("{endDate}", currentTime.EndTimeISO);
@@ -62,8 +62,11 @@ namespace FetchDailyReport
                             throw;
                         }
                     }
-                }                
-                countReportCollection.Add(countReport);
+                }
+                var dailyReport = new DailyReport();
+                dailyReport.ReportName = report.ReportName;
+                dailyReport.TotalCount = countReport.pagination.Total.ToString();
+                dailyReports.Add(dailyReport);
             }
         }
     }
