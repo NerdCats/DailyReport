@@ -62,8 +62,9 @@
   <ItemGroup>
     <Compile Include="Model\DailyReport.cs" />
     <Compile Include="Model\EmailModel.cs" />
+    <Compile Include="Model\LoginCredentials.cs" />
     <Compile Include="URLs.cs" />
-    <Compile Include="Config\DailyReportConfigModel.cs" />
+    <Compile Include="Model\DailyReportConfigModel.cs" />
     <Compile Include="Model\CountReport.cs" />
     <Compile Include="Model\Token.cs" />
     <Compile Include="Program.cs" />
@@ -76,6 +77,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Config\DailyReportConf.json" />
+    <None Include="Config\LoginCredential.json" />
     <None Include="Config\MailConfig.json" />
     <None Include="packages.config" />
   </ItemGroup>

@@ -15,5 +15,6 @@ namespace FetchDailyReport
         public static string ApplicationRootDirectory = new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName;
         public static string DailyReportConfigFilePath = ApplicationRootDirectory + "/Config/DailyReportConf.json";
         public static string EmailConfigFilePath = ApplicationRootDirectory + "/Config/MailConfig.json";
+        public static string LoginCredentialsPath = ApplicationRootDirectory + "/Config/LoginCredential.json";
     }
 }
