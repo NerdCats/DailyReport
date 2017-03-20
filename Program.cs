@@ -68,6 +68,9 @@ namespace FetchDailyReport
                 dailyReport.TotalCount = countReport.pagination.Total.ToString();
                 dailyReports.Add(dailyReport);
             }
+            var reportText = DailyReportGenerator.generateDailyReport(dailyReports);
+            MailUtility.SendEmailReport("Daily Fetch Report", reportText);
         }
+
     }
 }

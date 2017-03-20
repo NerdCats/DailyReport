@@ -61,18 +61,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\DailyReport.cs" />
+    <Compile Include="Model\EmailModel.cs" />
     <Compile Include="URLs.cs" />
     <Compile Include="Config\DailyReportConfigModel.cs" />
     <Compile Include="Model\CountReport.cs" />
     <Compile Include="Model\Token.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\DailyReportGenerator.cs" />
     <Compile Include="Utility\HttpRequest.cs" />
+    <Compile Include="Utility\MailUtility.cs" />
     <Compile Include="Utility\TimeString.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Config\DailyReportConf.json" />
+    <None Include="Config\MailConfig.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
