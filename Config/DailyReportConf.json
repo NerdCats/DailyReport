@@ -1,0 +1,6 @@
+﻿[
+  {
+    "ReportName": "B2B Total Completed",
+    "ReportUrl": "http://fetchprod.gobd.co/api/job/odata?$filter=ModifiedTime gt datetime'{startDate}' and ModifiedTime lt datetime'{endDate}' and User/UserName ne 'B2C' and Tasks/any(task: task/State eq 'COMPLETED' and task/Type eq 'Delivery')&countOnly=true"
+  }
+]

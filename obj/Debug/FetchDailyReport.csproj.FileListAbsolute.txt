@@ -1,0 +1,13 @@
+c:\users\zervis\documents\visual studio 2015\Projects\FetchDailyReport\FetchDailyReport\bin\Debug\FetchDailyReport.exe.config
+c:\users\zervis\documents\visual studio 2015\Projects\FetchDailyReport\FetchDailyReport\bin\Debug\FetchDailyReport.exe
+c:\users\zervis\documents\visual studio 2015\Projects\FetchDailyReport\FetchDailyReport\bin\Debug\FetchDailyReport.pdb
+c:\users\zervis\documents\visual studio 2015\Projects\FetchDailyReport\FetchDailyReport\bin\Debug\BouncyCastle.Crypto.dll
+c:\users\zervis\documents\visual studio 2015\Projects\FetchDailyReport\FetchDailyReport\bin\Debug\MailKit.dll
+c:\users\zervis\documents\visual studio 2015\Projects\FetchDailyReport\FetchDailyReport\bin\Debug\MimeKit.dll
+c:\users\zervis\documents\visual studio 2015\Projects\FetchDailyReport\FetchDailyReport\bin\Debug\Newtonsoft.Json.dll
+c:\users\zervis\documents\visual studio 2015\Projects\FetchDailyReport\FetchDailyReport\bin\Debug\MailKit.xml
+c:\users\zervis\documents\visual studio 2015\Projects\FetchDailyReport\FetchDailyReport\bin\Debug\MimeKit.xml
+c:\users\zervis\documents\visual studio 2015\Projects\FetchDailyReport\FetchDailyReport\bin\Debug\Newtonsoft.Json.xml
+c:\users\zervis\documents\visual studio 2015\Projects\FetchDailyReport\FetchDailyReport\obj\Debug\FetchDailyReport.csprojResolveAssemblyReference.cache
+c:\users\zervis\documents\visual studio 2015\Projects\FetchDailyReport\FetchDailyReport\obj\Debug\FetchDailyReport.exe
+c:\users\zervis\documents\visual studio 2015\Projects\FetchDailyReport\FetchDailyReport\obj\Debug\FetchDailyReport.pdb
