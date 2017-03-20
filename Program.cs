@@ -10,14 +10,61 @@ namespace FetchDailyReport
     {
         static void Main(string[] args)
         {
+            List<CountReport> countReportCollection = new List<CountReport>();
             List<DailyReportConfigModel> dailyReport = DailyReportConfigModel.DailyReportConfigModelFactory();
-            var currentTime = new TimeString();
-            var url = dailyReport[0].ReportUrl.Replace("{startDate}", currentTime.StartTimeISO).Replace("{endDate}", currentTime.EndTimeISO);
-
-
-            var auth_token = new HttpRequest().getAuthToken();
-            var countReport = new HttpRequest().getReport(url, auth_token);
+            string auth_token;
+            try
+            {
+                auth_token = new HttpRequest().getAuthToken();
+            }
+            catch (Exception e)
+            {
+                try
+                {
+                    auth_token = new HttpRequest().getAuthToken();
+                }
+                catch (Exception e2)
+                {                    
+                    try
+                    {
+                        auth_token = new HttpRequest().getAuthToken();
+                    }
+                    catch (Exception e3)
+                    {
+                        throw;
+                    }
+                }                
+            }
             
+            var currentTime = new TimeString();
+            foreach (var report in dailyReport)
+            {
+                CountReport countReport;
+                var reportUrl = report.ReportUrl.Replace("{startDate}", currentTime.StartTimeISO).Replace("{endDate}", currentTime.EndTimeISO);
+                try
+                {
+                    countReport = new HttpRequest().getReport(reportUrl, auth_token);
+                }
+                catch (Exception e)
+                {
+                    try
+                    {
+                        countReport = new HttpRequest().getReport(reportUrl, auth_token);
+                    }
+                    catch (Exception e2)
+                    {
+                        try
+                        {
+                            countReport = new HttpRequest().getReport(reportUrl, auth_token);
+                        }
+                        catch (Exception ex3)
+                        {
+                            throw;
+                        }
+                    }
+                }                
+                countReportCollection.Add(countReport);
+            }
         }
     }
 }

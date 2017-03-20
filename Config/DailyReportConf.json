@@ -2,5 +2,27 @@
   {
     "ReportName": "B2B Total Completed",
     "ReportUrl": "http://fetchprod.gobd.co/api/job/odata?$filter=ModifiedTime gt datetime'{startDate}' and ModifiedTime lt datetime'{endDate}' and User/UserName ne 'B2C' and Tasks/any(task: task/State eq 'COMPLETED' and task/Type eq 'Delivery')&countOnly=true"
+  },
+  {
+	"ReportName" : "B2C Total Completed",
+	"ReportUrl" : "http://fetchprod.gobd.co/api/job/odata?$filter=ModifiedTime gt datetime'{startDate}' and ModifiedTime lt datetime'{endDate}' and User/UserName eq 'B2C' and Tasks/any(task: task/State eq 'COMPLETED' and task/Type eq 'Delivery')&countOnly=true"
+  },
+
+
+  {
+	  "ReportName" : "B2B Total Attempted",
+	  "ReportUrl" : "http://fetchprod.gobd.co/api/job/odata?$filter=ModifiedTime gt datetime'{startDate}' and ModifiedTime lt datetime'{endDate}' and User/UserName ne 'B2C' and Tasks/any(task: task/State eq 'IN_PROGRESS' and task/Variant eq 'retry' and task/Type eq 'Delivery')&countOnly=true"
+  },
+
+
+  {
+	  "ReportName" : "B2B Total Returned",
+	  "ReportUrl" : "http://fetchprod.gobd.co/api/job/odata?$filter=ModifiedTime gt datetime'{startDate}' and ModifiedTime lt datetime'{endDate}' and User/UserName ne 'B2C' and Tasks/any(task: task/State eq 'IN_PROGRESS' and task/Variant eq 'return' and task/Type eq 'Delivery')&countOnly=true"
+  },
+
+
+  {
+	  "ReportName" : "B2C Total Returned",
+	  "ReportUrl" : "http://fetchprod.gobd.co/api/job/odata?$filter=ModifiedTime gt datetime'{startDate}' and ModifiedTime lt datetime'{endDate}' and User/UserName eq 'B2C' and Tasks/any(task: task/State eq 'IN_PROGRESS' and task/Variant eq 'return' and task/Type eq 'Delivery')&countOnly=true"
   }
 ]
