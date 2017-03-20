@@ -18,6 +18,7 @@ namespace FetchDailyReport.Utility
             {
                 reportText += item.ReportName + " : " + item.TotalCount + "\n";
             }
+            Console.WriteLine(reportText + "\n\n\n\n");
             return reportText;
         }
         

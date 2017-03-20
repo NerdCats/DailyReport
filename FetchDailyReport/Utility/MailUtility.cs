@@ -13,7 +13,7 @@ namespace FetchDailyReport.Utility
 {
     class MailUtility
     {
-        public static void SendEmailReport(string subject, string emailMessage)
+        public static void SendEmailReport(string subject, string emailMessage, string attachedfilePath = null)
         {
             string emailConfigJson = File.ReadAllText(URLs.EmailConfigFilePath);
             EmailModel mail = JsonConvert.DeserializeObject<EmailModel>(emailConfigJson);
@@ -37,6 +37,26 @@ namespace FetchDailyReport.Utility
             {
                 Text = emailMessage
             };
+
+            var body = new TextPart("plain")
+            {
+                Text = emailMessage
+            };
+            var multipart = new Multipart("mixed");
+            multipart.Add(body);
+
+            if (attachedfilePath != null)
+            {
+                var attachment = new MimePart("text", "csv")
+                {
+                    ContentObject = new ContentObject(File.OpenRead(attachedfilePath), ContentEncoding.Default),
+                    ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
+                    ContentTransferEncoding = ContentEncoding.Base64,
+                    FileName = Path.GetFileName(attachedfilePath)
+                };
+                multipart.Add(attachment);
+            }
+            message.Body = multipart;
 
             // Send the mail
             using (var client = new SmtpClient())

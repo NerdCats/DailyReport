@@ -14,13 +14,8 @@ namespace FetchDailyReport.Utility
         public TimeString()
         {
             var nowUTCTime = new DateTime(2017, 03, 20, 23, 59, 00, DateTimeKind.Utc);
-
             this.EndTimeISO = nowUTCTime.ToString("yyyy-MM-ddTHH:mm:ssZ");
             this.StartTimeISO = nowUTCTime.AddHours(-24).ToString("yyyy-MM-ddTHH:mm:ssZ");
-
-            Console.WriteLine(this.StartTimeISO);
-            Console.WriteLine(this.EndTimeISO);
-            //Console.ReadLine();
         }
 
     }

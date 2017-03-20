@@ -16,8 +16,7 @@ namespace FetchDailyReport
             bool reportHasBeenSentOneAlreadyForToday = false;
             while (true)
             {
-                //if (DateTime.UtcNow.Hour == 17 && DateTime.UtcNow.Minute > 50 && !reportHasBeenSentOneAlreadyForToday)
-                if (DateTime.UtcNow.Hour == 11 && DateTime.UtcNow.Minute < 50 && !reportHasBeenSentOneAlreadyForToday)
+                if (DateTime.UtcNow.Hour == 17 && DateTime.UtcNow.Minute > 50 && !reportHasBeenSentOneAlreadyForToday)
                 {
                     reportHasBeenSentOneAlreadyForToday = true;
                     #region Report generation and email send                    
@@ -82,7 +81,7 @@ namespace FetchDailyReport
                     }
                     var reportText = DailyReportGenerator.generateDailyReport(dailyReports);
                     var reportFilePath = DailyReportGenerator.generateDailyReportCSV(dailyReports);
-                    MailUtility.SendEmailReport("Daily Fetch Report", reportText);
+                    MailUtility.SendEmailReport("Daily Fetch Report", reportText, reportFilePath);
 
                     #endregion
                 }
@@ -90,10 +89,7 @@ namespace FetchDailyReport
                 {
                     reportHasBeenSentOneAlreadyForToday = true;
                 }
-
-            }
-            
+            }            
         }
-
     }
 }
