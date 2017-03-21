@@ -12,6 +12,7 @@ namespace FetchDailyReport.Model
     {
         public string ReportName { get; set; }
         public string ReportUrl { get; set; }
+        public int EndTimeHourOffsetFromLastHourOfTheDay { get; set; }
 
         public static List<DailyReportConfigModel> DailyReportConfigModelFactory()
         {

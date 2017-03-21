@@ -1,5 +1,4 @@
 ﻿using FetchDailyReport.Model;
-using FetchDailyReport.Model;
 using FetchDailyReport.Utility;
 using System;
 using System.Collections.Generic;
@@ -9,14 +8,15 @@ namespace FetchDailyReport
     class Program
     {
         static void Main(string[] args)
-        {            
+        {
             List<DailyReport> dailyReports = new List<DailyReport>();
             List<DailyReportConfigModel> dailyReportConfig = DailyReportConfigModel.DailyReportConfigModelFactory();
             string auth_token;
             bool reportHasBeenSentOneAlreadyForToday = false;
             while (true)
             {
-                if (DateTime.UtcNow.Hour == 17 && DateTime.UtcNow.Minute > 50 && !reportHasBeenSentOneAlreadyForToday)                
+                //if (DateTime.UtcNow.Hour == 17 && DateTime.UtcNow.Minute > 50 && !reportHasBeenSentOneAlreadyForToday)
+                if (DateTime.UtcNow.Hour == 6 && DateTime.UtcNow.Minute < 50 && !reportHasBeenSentOneAlreadyForToday)
                 {
                     reportHasBeenSentOneAlreadyForToday = true;
                     #region Report generation and email send                    
@@ -49,7 +49,16 @@ namespace FetchDailyReport
                     foreach (var report in dailyReportConfig)
                     {
                         CountReport countReport;
-                        var reportUrl = report.ReportUrl.Replace("{startDate}", currentTime.StartTimeISO).Replace("{endDate}", currentTime.EndTimeISO);
+                        string reportUrl;
+                        if (report.ReportName.Contains("Pending"))
+                        {
+                            reportUrl = report.ReportUrl.Replace("{startDate}", currentTime.StartTimeISO).Replace("{endDate}", currentTime.GetNewTimeString(report.EndTimeHourOffsetFromLastHourOfTheDay));
+                        }
+                        else
+                        {
+                            reportUrl = report.ReportUrl.Replace("{startDate}", currentTime.StartTimeISO).Replace("{endDate}", currentTime.EndTimeISO);
+                        }
+                        
                         try
                         {
                             countReport = new HttpRequest().getReport(reportUrl, auth_token);

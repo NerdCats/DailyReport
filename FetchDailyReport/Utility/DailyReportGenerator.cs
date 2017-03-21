@@ -12,7 +12,7 @@ namespace FetchDailyReport.Utility
     {
         public static string generateDailyReport(List<DailyReport> dailyReports)
         {
-            var currentTime = DateTime.UtcNow.AddHours(6);
+            var currentTime = DateTime.UtcNow.AddHours(-6);
             string reportText = "Today is " + currentTime + "\n";
             foreach (var item in dailyReports)
             {
@@ -24,7 +24,7 @@ namespace FetchDailyReport.Utility
         
         public static string generateDailyReportCSV(List<DailyReport> dailyReports)
         {
-            var currentTime = DateTime.UtcNow.AddHours(6).ToShortDateString().Replace('/', '-');
+            var currentTime = DateTime.UtcNow.AddHours(-6).ToShortDateString().Replace('/', '-');
             string reportText = "Today is " + currentTime + ",,\n";
             foreach (var item in dailyReports)
             {
