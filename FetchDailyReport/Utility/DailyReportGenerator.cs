@@ -17,6 +17,10 @@ namespace FetchDailyReport.Utility
             foreach (var item in dailyReports)
             {
                 reportText += item.ReportName + " : " + item.TotalCount + "\n";
+                if (item.NewLine != null)
+                {
+                    reportText += item.NewLine;
+                }
             }
             Console.WriteLine(reportText + "\n\n\n\n");
             return reportText;
@@ -29,6 +33,10 @@ namespace FetchDailyReport.Utility
             foreach (var item in dailyReports)
             {
                 reportText += item.ReportName + "," + item.TotalCount + ",\n";
+                if (item.NewLine != null)
+                {
+                    reportText += item.NewLine;
+                }
             }
 
             var filePath = URLs.ApplicationRootDirectory + "/CSV/" + currentTime + ".csv";

@@ -10,5 +10,6 @@ namespace FetchDailyReport.Model
     {
         public string ReportName { get; set; }
         public string TotalCount { get; set; }
+        public string NewLine { get; set; }
     }
 }

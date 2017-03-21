@@ -15,8 +15,7 @@ namespace FetchDailyReport
             bool reportHasBeenSentOneAlreadyForToday = false;
             while (true)
             {
-                //if (DateTime.UtcNow.Hour == 17 && DateTime.UtcNow.Minute > 50 && !reportHasBeenSentOneAlreadyForToday)
-                if (DateTime.UtcNow.Hour == 6 && DateTime.UtcNow.Minute < 50 && !reportHasBeenSentOneAlreadyForToday)
+                if (DateTime.UtcNow.Hour == 17 && DateTime.UtcNow.Minute > 50 && !reportHasBeenSentOneAlreadyForToday)
                 {
                     reportHasBeenSentOneAlreadyForToday = true;
                     #region Report generation and email send                    
@@ -86,6 +85,7 @@ namespace FetchDailyReport
                         var dailyReport = new DailyReport();
                         dailyReport.ReportName = report.ReportName;
                         dailyReport.TotalCount = countReport.pagination.Total.ToString();
+                        dailyReport.NewLine = report.NewLine;
                         dailyReports.Add(dailyReport);
                     }
                     var reportText = DailyReportGenerator.generateDailyReport(dailyReports);
