@@ -10,23 +10,29 @@ namespace FetchDailyReport.Utility
     {
         public string StartTimeISO { get; set; }
         public string EndTimeISO { get; set; }
-        private DateTime nowUTCTime;
+        private DateTime startUTCTime;
+        private DateTime endUTCTime;
 
         public TimeString()
         {
             var todayDate = DateTime.UtcNow.Date.Day;
             var thisMonth = DateTime.UtcNow.Month;
-            var thisYear = DateTime.UtcNow.Year;
+            var thisYear = DateTime.UtcNow.Year;            
+            
+            startUTCTime = new DateTime(thisYear, thisMonth, todayDate, 2, 00, 00, DateTimeKind.Utc);  // Find out Next day 2AM in the night of BD time
+            endUTCTime = DateTime.UtcNow;
 
-            nowUTCTime = new DateTime(thisYear, thisMonth, todayDate, 23, 59, 00, DateTimeKind.Utc);
-            nowUTCTime = nowUTCTime.AddHours(-6);
-            this.EndTimeISO = nowUTCTime.ToString("yyyy-MM-ddTHH:mm:ssZ");
-            this.StartTimeISO = nowUTCTime.AddHours(-24).ToString("yyyy-MM-ddTHH:mm:ssZ");
+            this.StartTimeISO = startUTCTime.ToString("yyyy-MM-ddTHH:mm:ssZ");
+            this.EndTimeISO = endUTCTime.ToString("yyyy-MM-ddTHH:mm:ssZ");
+
+            //var start = new DateTime(startUTCTime.Year, startUTCTime.Month, startUTCTime.Date.Day, startUTCTime.Hour, startUTCTime.Minute, startUTCTime.Second, DateTimeKind.Local).AddHours(6);
+            //var end = new DateTime(endUTCTime.Year, endUTCTime.Month, endUTCTime.Date.Day, endUTCTime.Hour, endUTCTime.Minute, startUTCTime.Second, DateTimeKind.Local).AddHours(6);
+
         }
 
         public string GetNewTimeString(int hourDifferenceFromStartTime)
         {
-            var newTime = this.nowUTCTime.AddHours(hourDifferenceFromStartTime).ToString("yyyy-MM-ddTHH:mm:ssZ");
+            var newTime = this.startUTCTime.AddHours(hourDifferenceFromStartTime).ToString("yyyy-MM-ddTHH:mm:ssZ");
             return newTime;
         }
 
