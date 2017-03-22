@@ -2,6 +2,7 @@
 using FetchDailyReport.Utility;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace FetchDailyReport
 {
@@ -16,8 +17,8 @@ namespace FetchDailyReport
             
             while (true)
             {
-                //if (DateTime.UtcNow.Hour == 20 && DateTime.UtcNow.Minute > 5 && !reportHasBeenSentOneAlreadyForToday)
-                if (DateTime.UtcNow.Hour == 7 && DateTime.UtcNow.Minute > 1 && !reportHasBeenSentOneAlreadyForToday)
+                if (DateTime.UtcNow.Hour > 18 && !reportHasBeenSentOneAlreadyForToday)
+                //if (DateTime.UtcNow.Hour > 6 && !reportHasBeenSentOneAlreadyForToday)
                 {
                     reportHasBeenSentOneAlreadyForToday = true;
                     #region Report generation and email send                    
@@ -87,19 +88,20 @@ namespace FetchDailyReport
                         }
                         var dailyReport = new DailyReport();
                         dailyReport.ReportName = report.ReportName;
-                        dailyReport.TotalCount = countReport.pagination.Total.ToString();
+                        dailyReport.TotalCount = countReport.pagination.Total;
                         dailyReport.NewLine = report.NewLine;
                         dailyReports.Add(dailyReport);
                     }
                     var reportText = DailyReportGenerator.generateDailyReport(dailyReports);
                     var reportFilePath = DailyReportGenerator.generateDailyReportCSV(dailyReports);
-                    //MailUtility.SendEmailReport("Daily Fetch Report", reportText, reportFilePath);
+                    MailUtility.SendEmailReport("Daily Fetch Report", reportText, reportFilePath);
                     #endregion
                 }
                 if (DateTime.UtcNow.Hour == 21 && reportHasBeenSentOneAlreadyForToday)
                 {
                     reportHasBeenSentOneAlreadyForToday = true;
                 }
+                Thread.Sleep(100000);
             }            
         }
     }

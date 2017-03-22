@@ -28,8 +28,8 @@ namespace FetchDailyReport.Utility
             this.StartTimeISO = startUTCTime.ToString("yyyy-MM-ddTHH:mm:ssZ");
             this.EndTimeISO = endUTCTime.ToString("yyyy-MM-ddTHH:mm:ssZ");
 
-            StartBDTime = new DateTime(startUTCTime.Year, startUTCTime.Month, startUTCTime.Date.Day, startUTCTime.Hour, startUTCTime.Minute, startUTCTime.Second, DateTimeKind.Local).AddHours(6).ToString("MMM d, h:mm:ss tt");
-            EndBDTime = new DateTime(endUTCTime.Year, endUTCTime.Month, endUTCTime.Date.Day, endUTCTime.Hour, endUTCTime.Minute, startUTCTime.Second, DateTimeKind.Local).AddHours(6).ToString("MMM d, h:mm:ss tt");
+            StartBDTime = new DateTime(startUTCTime.Year, startUTCTime.Month, startUTCTime.Date.Day, startUTCTime.Hour, startUTCTime.Minute, startUTCTime.Second, DateTimeKind.Local).AddHours(6).ToString("MMM d h:mm:ss tt");
+            EndBDTime = new DateTime(endUTCTime.Year, endUTCTime.Month, endUTCTime.Date.Day, endUTCTime.Hour, endUTCTime.Minute, startUTCTime.Second, DateTimeKind.Local).AddHours(6).ToString("MMM d h:mm:ss tt");
 
         }
 
