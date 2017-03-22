@@ -13,10 +13,11 @@ namespace FetchDailyReport
             List<DailyReportConfigModel> dailyReportConfig = DailyReportConfigModel.DailyReportConfigModelFactory();
             string auth_token;
             bool reportHasBeenSentOneAlreadyForToday = false;
+            
             while (true)
             {
-                if (DateTime.UtcNow.Hour == 20 && DateTime.UtcNow.Minute > 5 && !reportHasBeenSentOneAlreadyForToday)
-                //if (DateTime.UtcNow.Hour == 11 && DateTime.UtcNow.Minute > 1 && !reportHasBeenSentOneAlreadyForToday)
+                //if (DateTime.UtcNow.Hour == 20 && DateTime.UtcNow.Minute > 5 && !reportHasBeenSentOneAlreadyForToday)
+                if (DateTime.UtcNow.Hour == 7 && DateTime.UtcNow.Minute > 1 && !reportHasBeenSentOneAlreadyForToday)
                 {
                     reportHasBeenSentOneAlreadyForToday = true;
                     #region Report generation and email send                    
@@ -50,14 +51,15 @@ namespace FetchDailyReport
                     {
                         CountReport countReport;
                         string reportUrl;
-                        if (report.ReportName.Contains("Pending"))
+                        if (report.ReportName.Contains("Pending") || report.ReportName.Contains("In Progress"))
                         {
-                            reportUrl = report.ReportUrl.Replace("{startDate}", currentTime.StartTimeISO).Replace("{endDate}", currentTime.GetNewTimeString(report.EndTimeHourOffsetFromLastHourOfTheDay));
+                            reportUrl = report.ReportUrl.Replace("{endDate}", currentTime.GetNewTimeString(report.EndTimeHourOffsetFromLastHourOfTheDay));
                         }
                         else
                         {
                             reportUrl = report.ReportUrl.Replace("{startDate}", currentTime.StartTimeISO).Replace("{endDate}", currentTime.EndTimeISO);
                         }
+                        Console.WriteLine(report.ReportName + ":\n\n" + reportUrl + "\n\n\n\n");
                         
                         try
                         {
@@ -91,7 +93,7 @@ namespace FetchDailyReport
                     }
                     var reportText = DailyReportGenerator.generateDailyReport(dailyReports);
                     var reportFilePath = DailyReportGenerator.generateDailyReportCSV(dailyReports);
-                    MailUtility.SendEmailReport("Daily Fetch Report", reportText, reportFilePath);
+                    //MailUtility.SendEmailReport("Daily Fetch Report", reportText, reportFilePath);
                     #endregion
                 }
                 if (DateTime.UtcNow.Hour == 21 && reportHasBeenSentOneAlreadyForToday)

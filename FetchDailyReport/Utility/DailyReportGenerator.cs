@@ -12,8 +12,8 @@ namespace FetchDailyReport.Utility
     {
         public static string generateDailyReport(List<DailyReport> dailyReports)
         {
-            var currentTime = DateTime.UtcNow.AddHours(-6);
-            string reportText = "Today is " + currentTime + "\n";
+            var currentTime = new TimeString();
+            string reportText = "The following Report is calculated based on this timeline:\nFrom " + currentTime.StartBDTime + " to " + currentTime.EndBDTime + "\n\n";
             foreach (var item in dailyReports)
             {
                 reportText += item.ReportName + " : " + item.TotalCount + "\n";
@@ -28,8 +28,9 @@ namespace FetchDailyReport.Utility
         
         public static string generateDailyReportCSV(List<DailyReport> dailyReports)
         {
-            var currentTime = DateTime.UtcNow.AddHours(-6).ToShortDateString().Replace('/', '-');
-            string reportText = "Today is " + currentTime + ",,\n";
+            var currentTime = new TimeString();
+            
+            string reportText = "The following Report is calculated based on this timeline:\n From " + currentTime.StartBDTime + " to " + currentTime.EndBDTime + "\n\n";
             foreach (var item in dailyReports)
             {
                 reportText += item.ReportName + "," + item.TotalCount + ",\n";
@@ -38,8 +39,8 @@ namespace FetchDailyReport.Utility
                     reportText += item.NewLine;
                 }
             }
-
-            var filePath = URLs.ApplicationRootDirectory + "/CSV/" + currentTime + ".csv";
+            var fileName = DateTime.UtcNow.AddHours(-6).ToShortDateString().Replace('/', '-');
+            var filePath = URLs.ApplicationRootDirectory + "/CSV/" + fileName + ".csv";
             File.WriteAllText(filePath, reportText);
             return filePath;
         }

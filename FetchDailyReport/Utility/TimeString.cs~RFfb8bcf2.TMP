@@ -13,23 +13,20 @@ namespace FetchDailyReport.Utility
         private DateTime startUTCTime;
         private DateTime endUTCTime;
 
-        public string StartBDTime { get; set; }
-        public string EndBDTime { get; set; }
-
         public TimeString()
         {
             var todayDate = DateTime.UtcNow.Date.Day;
             var thisMonth = DateTime.UtcNow.Month;
             var thisYear = DateTime.UtcNow.Year;            
                         
-            endUTCTime = new DateTime(thisYear, thisMonth, todayDate, 17, 59, 59, DateTimeKind.Utc);  // Find out Next day 2AM in the night of BD time
-            startUTCTime = endUTCTime.AddHours(-23).AddMinutes(-59).AddSeconds(-59);
+            endUTCTime = new DateTime(thisYear, thisMonth, todayDate, 6, 00, 00, DateTimeKind.Utc);  // Find out Next day 2AM in the night of BD time
+            startUTCTime = endUTCTime.AddHours(-23);
 
             this.StartTimeISO = startUTCTime.ToString("yyyy-MM-ddTHH:mm:ssZ");
             this.EndTimeISO = endUTCTime.ToString("yyyy-MM-ddTHH:mm:ssZ");
 
-            StartBDTime = new DateTime(startUTCTime.Year, startUTCTime.Month, startUTCTime.Date.Day, startUTCTime.Hour, startUTCTime.Minute, startUTCTime.Second, DateTimeKind.Local).AddHours(6).ToString("MMM d, h:mm:ss tt");
-            EndBDTime = new DateTime(endUTCTime.Year, endUTCTime.Month, endUTCTime.Date.Day, endUTCTime.Hour, endUTCTime.Minute, startUTCTime.Second, DateTimeKind.Local).AddHours(6).ToString("MMM d, h:mm:ss tt");
+            var start = new DateTime(startUTCTime.Year, startUTCTime.Month, startUTCTime.Date.Day, startUTCTime.Hour, startUTCTime.Minute, startUTCTime.Second, DateTimeKind.Local).AddHours(6);
+            var end = new DateTime(endUTCTime.Year, endUTCTime.Month, endUTCTime.Date.Day, endUTCTime.Hour, endUTCTime.Minute, startUTCTime.Second, DateTimeKind.Local).AddHours(6);
 
         }
 
