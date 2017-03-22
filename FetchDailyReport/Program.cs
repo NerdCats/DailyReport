@@ -97,7 +97,7 @@ namespace FetchDailyReport
                     MailUtility.SendEmailReport("Daily Fetch Report", reportText, reportFilePath);
                     #endregion
                 }
-                if (DateTime.UtcNow.Hour == 21 && reportHasBeenSentOneAlreadyForToday)
+                if (DateTime.UtcNow.Hour > 21 && reportHasBeenSentOneAlreadyForToday)
                 {
                     reportHasBeenSentOneAlreadyForToday = true;
                 }
