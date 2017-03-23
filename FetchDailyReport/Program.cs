@@ -10,6 +10,7 @@ namespace FetchDailyReport
     {
         static void Main(string[] args)
         {
+            var currentsTime = new TimeString();
             List<DailyReport> dailyReports = new List<DailyReport>();
             List<DailyReportConfigModel> dailyReportConfig = DailyReportConfigModel.DailyReportConfigModelFactory();
             string auth_token;
@@ -17,7 +18,7 @@ namespace FetchDailyReport
             
             while (true)
             {
-                if (DateTime.UtcNow.Hour > 18 && !reportHasBeenSentOneAlreadyForToday)
+                if (DateTime.UtcNow.Hour > 1 && !reportHasBeenSentOneAlreadyForToday)
                 //if (DateTime.UtcNow.Hour > 6 && !reportHasBeenSentOneAlreadyForToday)
                 {
                     reportHasBeenSentOneAlreadyForToday = true;

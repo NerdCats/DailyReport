@@ -22,7 +22,7 @@ namespace FetchDailyReport.Utility
             var thisMonth = DateTime.UtcNow.Month;
             var thisYear = DateTime.UtcNow.Year;            
                         
-            endUTCTime = new DateTime(thisYear, thisMonth, todayDate, 17, 59, 59, DateTimeKind.Utc);  // Find out Next day 2AM in the night of BD time
+            endUTCTime = new DateTime(thisYear, thisMonth, todayDate, 1, 59, 59, DateTimeKind.Utc);  // Find out Next day 2AM in the night of BD time
             startUTCTime = endUTCTime.AddHours(-23).AddMinutes(-59).AddSeconds(-59);
 
             this.StartTimeISO = startUTCTime.ToString("yyyy-MM-ddTHH:mm:ssZ");
