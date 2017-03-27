@@ -17,7 +17,7 @@ namespace FetchDailyReport
             
             while (true)
             {
-                if (DateTime.UtcNow.Hour > 18 && !reportHasBeenSentOneAlreadyForToday)
+                if (DateTime.UtcNow.Hour == 18 && DateTime.UtcNow.Hour > 40 && !reportHasBeenSentOneAlreadyForToday)
                 //if (DateTime.UtcNow.Hour > 6 && !reportHasBeenSentOneAlreadyForToday)
                 {
                     reportHasBeenSentOneAlreadyForToday = true;
@@ -99,7 +99,7 @@ namespace FetchDailyReport
                 }
                 if (DateTime.UtcNow.Hour > 21 && reportHasBeenSentOneAlreadyForToday)
                 {
-                    reportHasBeenSentOneAlreadyForToday = true;
+                    reportHasBeenSentOneAlreadyForToday = false;
                 }
                 Thread.Sleep(100000);
             }            
