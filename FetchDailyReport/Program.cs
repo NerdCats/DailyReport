@@ -10,6 +10,7 @@ namespace FetchDailyReport
     {
         static void Main(string[] args)
         {
+            var currentsTime = new TimeString();
             List<DailyReport> dailyReports = new List<DailyReport>();
             List<DailyReportConfigModel> dailyReportConfig = DailyReportConfigModel.DailyReportConfigModelFactory();
             string auth_token;
