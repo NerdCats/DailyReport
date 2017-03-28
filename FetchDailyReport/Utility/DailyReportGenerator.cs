@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FetchDailyReport.Utility
 {
@@ -15,48 +12,44 @@ namespace FetchDailyReport.Utility
             var currentTime = new TimeString();
 
             string reportText = "The following Report is calculated based on this timeline:\n From " + currentTime.StartBDTime + " to " + currentTime.EndBDTime + "\n\n";
-            int b2bTotalDispatched = 0;
-            int b2cTotalDispatched = 0;
-
-            string b2bTotalCompletedPercent = "";
-            string b2cTotalCompletedPercent = "";
-
-            string b2bTotalAttemptedPercent = "";
-            string b2cTotalAttemptedPercent = "";
-
+                        
+            var B2BTotalDispatchedIndex = dailyReports.FindLastIndex(x => x.ReportName == "B2B Total Dispatched");
+            var B2CTotalDispatchedIndex = dailyReports.FindLastIndex(x => x.ReportName == "B2C Total Dispatched");
             foreach (var item in dailyReports)
             {
                 if (item.ReportName.Contains("B2B Total Completed") || item.ReportName.Contains("B2B Total Attempted") || item.ReportName.Contains("B2B Total Returned"))
                 {
-                    b2bTotalDispatched += item.TotalCount;
+                    dailyReports[B2BTotalDispatchedIndex].TotalCount += item.TotalCount;                                        
                 }
 
                 if (item.ReportName.Contains("B2C Total Completed") || item.ReportName.Contains("B2C Total Attempted") || item.ReportName.Contains("B2C Total Returned"))
-                {
-                    b2cTotalDispatched += item.TotalCount;
+                {                   
+                    dailyReports[B2CTotalDispatchedIndex].TotalCount += item.TotalCount;                    
                 }
             }
-            reportText += "\nB2B Total Dispatched, " + b2bTotalDispatched;
-            reportText += "\nB2C Total Dispatched, " + b2cTotalDispatched + "\n\n";
 
             foreach (var item in dailyReports)
             {
-                if (item.ReportName.Contains("B2B Total Completed"))
+                if (item.ReportName.Contains("B2B Total Completed Percentage"))
                 {
-                    b2bTotalCompletedPercent = percentageCalculate(item.TotalCount, b2bTotalDispatched);
+                    var B2BTotalCompletedIndex = dailyReports.FindLastIndex(x => x.ReportName == "B2B Total Completed");
+                    item.TotalCount = percentageCalculate(dailyReports[B2BTotalCompletedIndex].TotalCount, dailyReports[B2BTotalDispatchedIndex].TotalCount);
                 }
-                if (item.ReportName.Contains("B2C Total Completed"))
+                if (item.ReportName.Contains("B2C Total Completed Percentage"))
                 {
-                    b2cTotalCompletedPercent = percentageCalculate(item.TotalCount, b2cTotalDispatched);
+                    var B2CTotalCompletedIndex = dailyReports.FindLastIndex(x => x.ReportName == "B2C Total Completed");
+                    item.TotalCount = percentageCalculate(dailyReports[B2CTotalCompletedIndex].TotalCount, dailyReports[B2CTotalDispatchedIndex].TotalCount);
                 }
 
-                if (item.ReportName.Contains("B2B Total Attempted"))
+                if (item.ReportName.Contains("B2B Total Attempted Percentage"))
                 {
-                    b2bTotalAttemptedPercent = percentageCalculate(item.TotalCount, b2bTotalDispatched);
+                    var B2BTotalAttemptedIndex = dailyReports.FindLastIndex(x => x.ReportName == "B2B Total Attempted");
+                    item.TotalCount = percentageCalculate(dailyReports[B2BTotalAttemptedIndex].TotalCount, dailyReports[B2BTotalDispatchedIndex].TotalCount);
                 }
-                if (item.ReportName.Contains("B2C Total Attempted"))
+                if (item.ReportName.Contains("B2C Total Attempted Percentage"))
                 {
-                    b2cTotalAttemptedPercent = percentageCalculate(item.TotalCount, b2cTotalDispatched);
+                    var B2CTotalAttemptedIndex = dailyReports.FindLastIndex(x => x.ReportName == "B2C Total Attempted");
+                    item.TotalCount = percentageCalculate(dailyReports[B2CTotalAttemptedIndex].TotalCount, dailyReports[B2CTotalDispatchedIndex].TotalCount);
                 }
 
                 reportText += item.ReportName + ", " + item.TotalCount + "\n";
@@ -66,31 +59,23 @@ namespace FetchDailyReport.Utility
                 }
             }
 
-            reportText += "\nB2B Total Completed Percentage, " + b2bTotalCompletedPercent + "%";
-            reportText += "\nB2B Total Attempted Percentage, " + b2bTotalAttemptedPercent + "%\n\n";
-
-            reportText += "\nB2C Total Completed Percentage, " + b2cTotalCompletedPercent + "%";
-            reportText += "\nB2C Total Attempted Percentage, " + b2cTotalAttemptedPercent + "%";
-
             Console.WriteLine(reportText + "\n\n\n\n");
             return reportText;
         }
         
-        public static string generateDailyReportCSV(List<DailyReport> dailyReports)
+        public static string generateDailyReportCSV(string reportText)
         {
-            var reportText = DailyReportGenerator.generateDailyReport(dailyReports);
+            //var reportText = DailyReportGenerator.generateDailyReport(dailyReports);
             var fileName = DateTime.UtcNow.AddHours(-6).ToShortDateString().Replace('/', '-');
             var filePath = URLs.ApplicationRootDirectory + "/CSV/" + fileName + ".csv";
             File.WriteAllText(filePath, reportText);
             return filePath;
         }
 
-        private static string percentageCalculate(int occurance, int total)
-        {
-            double _occurance = Convert.ToDouble(occurance);
-            double _total = Convert.ToDouble(total);
-            double percentage = (_occurance / _total) * 100;
-            return Math.Round(percentage, 2).ToString();
+        private static double percentageCalculate(double occurance, double total)
+        {    
+            double percentage = (occurance / total) * 100;
+            return Math.Round(percentage, 2);
         }
     }
 }

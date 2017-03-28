@@ -9,7 +9,7 @@ namespace FetchDailyReport.Model
     public class DailyReport
     {
         public string ReportName { get; set; }
-        public int TotalCount { get; set; }
+        public double TotalCount { get; set; }
         public string NewLine { get; set; }
     }
 }
