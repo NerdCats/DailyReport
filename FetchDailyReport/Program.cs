@@ -9,19 +9,19 @@ namespace FetchDailyReport
     class Program
     {
         static void Main(string[] args)
-        {
-            var currentsTime = new TimeString();
-            List<DailyReport> dailyReports = new List<DailyReport>();
-            List<DailyReportConfigModel> dailyReportConfig = DailyReportConfigModel.DailyReportConfigModelFactory();
+        {            
             string auth_token;
             bool reportHasBeenSentOneAlreadyForToday = false;
             
             while (true)
             {
+
                 if (DateTime.UtcNow.Hour == 19 && !reportHasBeenSentOneAlreadyForToday)
-                //if (DateTime.UtcNow.Hour == 6 && !reportHasBeenSentOneAlreadyForToday)
+                //if (DateTime.UtcNow.Hour > 6 && !reportHasBeenSentOneAlreadyForToday)
                 {
-                    reportHasBeenSentOneAlreadyForToday = true;
+                    List<DailyReport> dailyReports = new List<DailyReport>();
+                    List<DailyReportConfigModel> dailyReportConfig = DailyReportConfigModel.DailyReportConfigModelFactory();
+                    
                     #region Report generation and email send                    
                     try
                     {
@@ -99,6 +99,7 @@ namespace FetchDailyReport
                     var reportText = DailyReportGenerator.generateDailyReport(dailyReports);
                     var reportFilePath = DailyReportGenerator.generateDailyReportCSV(reportText);
                     MailUtility.SendEmailReport("Daily Fetch Report", reportText, reportFilePath);
+                    reportHasBeenSentOneAlreadyForToday = true; 
                     #endregion
                 }
                 if (DateTime.UtcNow.Hour > 21 && reportHasBeenSentOneAlreadyForToday)

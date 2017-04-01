@@ -1,27 +1,24 @@
-The following Report is calculated based on this timeline:
- From Mar 28 1:00:00 AM to Mar 29 12:59:00 AM
-
-B2B Total Dispatched, 31
-B2B Total Completed, 1
-B2B Total Attempted, 23
-B2B Total Returned, 7
-B2B Total Attempted Percentage, 74.19
-B2B Total Completed Percentage, 3.23
-
-B2B Total In Progress for last 3 days, 18
-B2B Total Pending for last 12 hours, 27
-
-
-
-B2C Total Dispatched, 2
-B2C Total Completed, 2
-B2C Total Attempted, 0
-B2C Total Returned, 0
-B2C Total Attempted Percentage, 0
-B2C Total Completed Percentage, 100
-
-B2C Total In Progress for last 3 days, 0
-B2C Total Pending for last 12 hours, 0
-
-
-
+The following Report is calculated based on this timeline:,
+ From Mar 28 1:00:00 AM to Mar 29 12:59:00 AM,
+,
+B2B Total Dispatched,31
+B2B Total Completed,1
+B2B Total Attempted,23
+B2B Total Returned,7
+B2B Total Attempted Percentage,74.19
+B2B Total Completed Percentage,3.23
+,
+B2B Total In Progress for last 3 days,18
+B2B Total Pending for last 12 hours,27
+,
+,
+,
+B2C Total Dispatched,2
+B2C Total Completed,2
+B2C Total Attempted,0
+B2C Total Returned,0
+B2C Total Attempted Percentage,0
+B2C Total Completed Percentage,100
+,
+B2C Total In Progress for last 3 days,0
+B2C Total Pending for last 12 hours,0
